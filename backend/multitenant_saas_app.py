@@ -39,7 +39,7 @@ if openai_api_key:
 JWT_SECRET = os.getenv("JWT_SECRET", "your-super-secret-jwt-key-change-in-production")
 
 # Create FastAPI app
-app = FastAPI(title="VoiceAI SaaS Platform", version="6.1.0")
+app = FastAPI(title="VoiceAI SaaS Platform", version="6.2.0")
 
 # Add CORS
 app.add_middleware(
@@ -1897,11 +1897,36 @@ async def twilio_voice_webhook(
         # Add to call logs
         call_logs[CallSid] = call_data
         
-        # Generate TwiML response
-        twilio_manager = get_twilio_manager()
-        twiml_response = twilio_manager.generate_voice_response(tenant_id)
+        # Generate TwiML response with new natural greeting
+        response = VoiceResponse()
         
-        return Response(content=twiml_response, media_type="application/xml")
+        # Natural, conversational greeting
+        greeting = """
+        Good day! Thanks for calling our dental office. 
+        This is Sarah, your virtual assistant. I'm here to help you schedule your appointment.
+        What can I do for you today? Just let me know your name and what type of appointment you're looking for.
+        I'll need to record our conversation so I can get all your details right.
+        Go ahead whenever you're ready!
+        """
+        
+        response.say(greeting, voice='alice', language='en-US', rate='0.9')
+        
+        # Record the call
+        webhook_base_url = os.getenv('WEBHOOK_BASE_URL', 'https://voiceai-backend-production-81d6.up.railway.app')
+        record_url = f"{webhook_base_url}/api/v1/twilio/recording"
+        if tenant_id:
+            record_url += f"?tenant_id={tenant_id}"
+            
+        response.record(
+            action=record_url,
+            method='POST',
+            max_length=300,  # 5 minutes max
+            finish_on_key='#',
+            transcribe=True,
+            transcribe_callback=f"{webhook_base_url}/api/v1/twilio/transcription"
+        )
+        
+        return Response(content=str(response), media_type="application/xml")
         
     except Exception as e:
         logger.error(f"Error in voice webhook: {e}")
