@@ -1933,7 +1933,7 @@ async def twilio_recording_webhook(
         
         # Generate TwiML response
         response = VoiceResponse()
-        response.say("Thank you! We've recorded your information and will call you back shortly to confirm your appointment.")
+        response.say("Perfect! I've got all that information. Someone from our office will give you a call back within the next few minutes to confirm your appointment and answer any questions you might have. Thanks so much for calling!")
         response.hangup()
         
         return Response(content=str(response), media_type="application/xml")
@@ -1941,7 +1941,7 @@ async def twilio_recording_webhook(
     except Exception as e:
         logger.error(f"Error in recording webhook: {e}")
         response = VoiceResponse()
-        response.say("Thank you for calling. Have a great day!")
+        response.say("Thanks again for calling! Have a wonderful day and we'll talk to you soon!")
         return Response(content=str(response), media_type="application/xml")
 
 @app.post("/api/v1/twilio/transcription")

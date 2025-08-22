@@ -72,16 +72,16 @@ class TwilioManager:
         """Generate TwiML response for incoming calls"""
         response = VoiceResponse()
         
-        # Greeting message
+        # Natural, conversational greeting
         greeting = """
-        Hello! Thank you for calling our dental practice. 
-        I'm your AI assistant and I'll help you schedule an appointment today.
-        Please tell me your name, phone number, and when you'd like to come in.
-        I'll be recording this call to ensure we get all your details correctly.
-        Please speak after the beep.
+        Good day! Thanks for calling our dental office. 
+        This is Sarah, your virtual assistant. I'm here to help you schedule your appointment.
+        What can I do for you today? Just let me know your name and what type of appointment you're looking for.
+        I'll need to record our conversation so I can get all your details right.
+        Go ahead whenever you're ready!
         """
         
-        response.say(greeting, voice='alice', language='en-US')
+        response.say(greeting, voice='alice', language='en-US', rate='0.9')
         
         # Record the call
         record_url = f"{self.webhook_base_url}/api/v1/twilio/recording"
