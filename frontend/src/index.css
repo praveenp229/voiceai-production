@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-gray-50 text-dark-700;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  /* Custom Button Styles */
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 
+           text-white font-medium py-2.5 px-6 rounded-lg shadow-custom
+           transition-all duration-200 hover:shadow-custom-lg hover:scale-105
+           focus:outline-none focus:ring-4 focus:ring-primary-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-gradient-to-r from-secondary-700 to-secondary-800 hover:from-secondary-800 hover:to-secondary-900 
+           text-white font-medium py-2.5 px-6 rounded-lg shadow-lg
+           transition-all duration-200 hover:shadow-xl hover:scale-105
+           focus:outline-none focus:ring-4 focus:ring-secondary-200;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-primary-500 text-primary-600 hover:bg-primary-500 hover:text-white
+           font-medium py-2 px-6 rounded-lg transition-all duration-200
+           focus:outline-none focus:ring-4 focus:ring-primary-200;
+  }
+  
+  /* Card Styles */
+  .card {
+    @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 
+           border border-gray-100 overflow-hidden;
+  }
+  
+  .card-gradient {
+    @apply bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg hover:shadow-xl 
+           transition-all duration-300 border border-gray-100 overflow-hidden;
+  }
+  
+  /* Stats Cards */
+  .stats-card {
+    @apply bg-gradient-to-br from-white to-primary-50 rounded-xl p-6 
+           shadow-custom hover:shadow-custom-lg transition-all duration-300
+           border-l-4 border-primary-500;
+  }
+  
+  .stats-card-secondary {
+    @apply bg-gradient-to-br from-white to-secondary-50 rounded-xl p-6 
+           shadow-lg hover:shadow-xl transition-all duration-300
+           border-l-4 border-secondary-700;
+  }
+  
+  /* Form Inputs */
+  .form-input {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg
+           focus:ring-4 focus:ring-primary-200 focus:border-primary-500
+           transition-all duration-200 bg-white;
+  }
+  
+  .form-label {
+    @apply block text-sm font-medium text-dark-600 mb-2;
+  }
+  
+  /* Navigation */
+  .nav-link {
+    @apply flex items-center px-4 py-3 text-gray-600 hover:text-primary-600 
+           hover:bg-primary-50 rounded-lg transition-all duration-200
+           font-medium;
+  }
+  
+  .nav-link-active {
+    @apply flex items-center px-4 py-3 text-primary-600 bg-primary-100
+           rounded-lg font-semibold;
+  }
+  
+  /* Status Badges */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .badge-success {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .badge-warning {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+  
+  .badge-error {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .badge-info {
+    @apply bg-blue-100 text-blue-800;
+  }
+  
+  .badge-primary {
+    @apply bg-primary-100 text-primary-800;
+  }
+  
+  /* Loading Animations */
+  .loading-spinner {
+    @apply animate-spin inline-block w-6 h-6 border-4 border-current border-t-transparent 
+           text-primary-600 rounded-full;
+  }
+  
+  /* Gradient Backgrounds */
+  .bg-hero-gradient {
+    background: linear-gradient(135deg, #FF6B35 0%, #1E3A8A 100%);
+  }
+  
+  .bg-card-gradient {
+    background: linear-gradient(145deg, #ffffff 0%, #fafafa 100%);
+  }
+  
+  .bg-stats-gradient {
+    background: linear-gradient(145deg, #FF6B35 0%, #FF8C69 100%);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF6B35;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #EA580C;
+}
+
+/* Smooth transitions for all elements */
+* {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, 
+              box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

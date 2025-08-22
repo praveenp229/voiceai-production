@@ -39,7 +39,7 @@ if openai_api_key:
 JWT_SECRET = os.getenv("JWT_SECRET", "your-super-secret-jwt-key-change-in-production")
 
 # Create FastAPI app
-app = FastAPI(title="VoiceAI SaaS Platform", version="6.0.0")
+app = FastAPI(title="VoiceAI SaaS Platform", version="6.1.0")
 
 # Add CORS
 app.add_middleware(
